@@ -1,0 +1,39 @@
+//19 March 2023
+
+bool isUndirectedGraphCyclic(vector<vector<int>>& g){
+	vector<bool> visited;
+    	for(int i=0; i<V; i++){
+    	if(!visited){
+    		if(isUndirectedGraphCyclic(i, g, visited, -1)){
+    		return true;
+    		}
+    	}
+    }
+    return false;
+}
+
+bool isUndirectedGraphCyclicHelper(int sv, vector<vector<int>>& g, vector<bool>& visited, int parent){
+	visited[sv]=true;
+	for(auto neighbour : g[sv]){
+		if(!visited[neighbour]){
+			if(isUndirectedGraphCyclicHelper(neighbour, g, visited, sv)){
+				return true;
+			}
+		}
+		else if(neighbour!=parent){
+			return true;
+		}
+	}
+	return false;
+}
+
+int main()
+{
+    //create graph
+
+    // to check cycle in undirected graph
+    bool isCyclic = isUndirectedGraphCyclic(g);
+    
+    return 0;
+
+}
